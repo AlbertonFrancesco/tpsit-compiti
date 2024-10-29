@@ -1,9 +1,6 @@
-import java.io.BufferedReader;
-import java.io.FileWriter;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
+import java.io.*;
 
-public class scrivere{
+public class scriviLinee{
     public scriviLinee (String file) throws IOException{
     PrintWriter uscita=new PrintWriter(new FileWriter(file));
     BufferedReader ingresso = new BufferedReader(new InputStreamReader(System.in));
@@ -17,9 +14,18 @@ public class scrivere{
         ingresso.close();
     }
 
-}
 
     public static void main(String[] args) throws Exception{
-
+        if (args.length == 0) {
+            System.out.println("Errore: specifica il nome del file come argomento.");
+            System.exit(1);
+        }
+        try {
+            new scriviLinee(args[0]);
+            System.out.println("Scrittura completata con successo.");
+        } catch (IOException ex) {
+            System.out.println("Errore di I/O.");
+            System.exit(1);
+        }
     }
 }
